@@ -15,15 +15,15 @@ labels:
 # Keep exactly one tag line per image and do not reformat these lines.
 images:
   - name: ghcr.io/akshayshetty7709-tech/slh-user-service
-    newTag: latest
+    newTag: sha-3722390
   - name: ghcr.io/akshayshetty7709-tech/slh-restaurant-service
-    newTag: latest
+    newTag: sha-3722390
   - name: ghcr.io/akshayshetty7709-tech/slh-order-service
-    newTag: latest
+    newTag: sha-3722390
   - name: ghcr.io/akshayshetty7709-tech/slh-payment-service
-    newTag: latest
+    newTag: sha-3722390
   - name: ghcr.io/akshayshetty7709-tech/slh-frontend
-    newTag: latest
+    newTag: sha-3722390
 
 patches:
   - target:
