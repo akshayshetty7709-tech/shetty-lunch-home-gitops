@@ -10,11 +10,6 @@ for bin in docker kind kubectl helm openssl; do
   command -v "$bin" >/dev/null || { echo "ERROR: '$bin' is not installed (see README prerequisites)"; exit 1; }
 done
 
-if grep -rq "akshayshetty7709-tech" argocd overlays base; then
-  echo "ERROR: placeholder akshayshetty7709-tech is still present."
-  echo "       Run ./scripts/replace-placeholders.sh <github-username> from the project root first (README step 2)."
-  exit 1
-fi
 
 echo ">>> 1/7 Creating kind cluster 'slh' (skipped if it exists)"
 if kind get clusters | grep -qx slh; then
@@ -40,7 +35,6 @@ helm repo add hashicorp https://helm.releases.hashicorp.com >/dev/null 2>&1 || t
 helm repo update >/dev/null
 helm upgrade --install vault hashicorp/vault --namespace vault --create-namespace \
   --set server.dev.enabled=true --set server.dev.devRootToken=root --set injector.enabled=false
-kubectl -n vault rollout status statefulset/vault --timeout=300s
 kubectl -n vault wait --for=condition=ready pod/vault-0 --timeout=300s
 
 echo ">>> 5/7 Writing random per-environment secrets into Vault"
